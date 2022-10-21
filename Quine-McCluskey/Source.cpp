@@ -35,7 +35,12 @@ int main() {
 	cout << endl;
 
 	for (int i = 0; i < numberOfOnes; i++) {
-		cin >> input;
+		do {
+			cin >> input;
+			if (input < 0 || input > 15) {
+				cout << "Wrong number, try again!" << endl;
+			}
+		} while (input < 0 || input > 15);
 		miOnes.push_back(input);
 	}
 
@@ -59,7 +64,9 @@ int main() {
 		cout << BR[miOnes[i]] << ": " << miOnes[i] << endl;
 	}
 
-	// ABR -> Ascending Binary Representation
+	// Quantity of 1s
+	cout << endl << "1s Quantity:" << endl;
+	cout << "----------------------" << endl;
 	vector<int> BRQ;
 	int Q;
 	for (int i = 0; i < numberOfOnes; i++) {
@@ -69,8 +76,17 @@ int main() {
 				Q++;
 			}
 		}
-		cout << Q << endl;
+		BRQ.push_back(Q);
+		cout << miOnes[i] << ": " << Q << endl;
 	}
+
+	cout << "----------------------------" << endl;
+	for (int i = 0; i < numberOfOnes; i++) {
+		cout << miOnes[i] << ":" << BRQ[i] << endl;
+	}
+
+	// ABR -> Ascending Binary Representation
+
 
 	system("pause");
 	return 0;
