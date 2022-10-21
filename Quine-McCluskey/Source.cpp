@@ -59,6 +59,19 @@ int main() {
 		cout << BR[miOnes[i]] << ": " << miOnes[i] << endl;
 	}
 
+	// ABR -> Ascending Binary Representation
+	vector<int> BRQ;
+	int Q;
+	for (int i = 0; i < numberOfOnes; i++) {
+		Q = 0;
+		for (int j = 0; j < 4; j++) {
+			if (BR[miOnes[i]][j] == '1') {
+				Q++;
+			}
+		}
+		cout << Q << endl;
+	}
+
 	system("pause");
 	return 0;
 }
