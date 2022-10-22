@@ -1,8 +1,64 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <algorithm>
+#include <iomanip>
 
 using namespace std;
+
+vector<int> ABR(vector<int> array,int numberOfOnes, vector<int> sortedOnes) {
+	for (int i = 0; i < numberOfOnes; i++) {
+		if (array[i] == 0) {
+			cout << setw(10);
+			cout << array[i] << endl;
+			sortedOnes.push_back(array[i]);
+		}
+	}
+	cout << setw(10);
+	cout << "-" << endl;
+	for (int i = 0; i < numberOfOnes; i++) {
+		if (array[i] == 1 || array[i] == 2 || array[i] == 4 || array[i] == 8) {
+			cout << setw(10);
+			cout << array[i] << endl;
+			sortedOnes.push_back(array[i]);
+		}
+	}
+	cout << setw(10);
+	cout << "-" << endl;
+	for (int i = 0; i < numberOfOnes; i++) {
+		if (array[i] == 3 || array[i] == 5 || array[i] == 6 || array[i] == 9 || array[i] == 10 || array[i] == 12) {
+			cout << setw(10);
+			cout << array[i] << endl;
+			sortedOnes.push_back(array[i]);
+		}
+	}
+	cout << setw(10);
+	cout << "-" << endl;
+	for (int i = 0; i < numberOfOnes; i++) {
+		if (array[i] == 7 || array[i] == 11 || array[i] == 13 || array[i] == 14) {
+			cout << setw(10);
+			cout << array[i] << endl;
+			sortedOnes.push_back(array[i]);
+		}
+	}
+	cout << setw(10);
+	cout << "-" << endl;
+	for (int i = 0; i < numberOfOnes; i++) {
+		if (array[i] == 15) {
+			cout << setw(10);
+			cout << array[i] << endl;
+			sortedOnes.push_back(array[i]);
+		}
+	}
+
+	return sortedOnes;
+}
+void BRT(int numberOfOnes, string BR[], vector<int> miOnes) {
+	for (int i = 0; i < numberOfOnes; i++) {
+		cout << setw(10);
+		cout << BR[miOnes[i]] << ": " << miOnes[i] << endl;
+	}
+}
 
 int main() {
 
@@ -58,14 +114,12 @@ int main() {
 	cout << "}" << endl;
 
 	// Binary Representation Table
-	cout << endl << "BR:" << endl;
+	cout << endl << endl << "BR:" << endl;
 	cout << "----------------------" << endl;
-	for (int i = 0; i < numberOfOnes; i++) {
-		cout << BR[miOnes[i]] << ": " << miOnes[i] << endl;
-	}
+	BRT(numberOfOnes, BR, miOnes);
 
 	// Quantity of 1s
-	cout << endl << "1s Quantity:" << endl;
+	cout << endl << endl << "1s Quantity:" << endl;
 	cout << "----------------------" << endl;
 	vector<int> BRQ;
 	int Q;
@@ -77,16 +131,21 @@ int main() {
 			}
 		}
 		BRQ.push_back(Q);
+		cout << setw(10);
 		cout << miOnes[i] << ": " << Q << endl;
 	}
 
-	cout << "----------------------------" << endl;
-	for (int i = 0; i < numberOfOnes; i++) {
-		cout << miOnes[i] << ":" << BRQ[i] << endl;
-	}
+	// ABR Sorting -> Ascending Binary Representation
+	sort(miOnes.begin(), miOnes.end());
+	vector<int> sortedOnes;
+	cout << endl << endl <<  "ABR:" << endl;
+	cout << "----------------------" << endl;
+	sortedOnes = ABR(miOnes, numberOfOnes, sortedOnes);
 
-	// ABR -> Ascending Binary Representation
+	// Simplification => checking distance
+	
 
+	
 
 	system("pause");
 	return 0;
