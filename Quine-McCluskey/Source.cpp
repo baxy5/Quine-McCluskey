@@ -3,6 +3,7 @@
 #include <string>
 #include <algorithm>
 #include <iomanip>
+#include <cmath>
 
 using namespace std;
 
@@ -53,10 +54,29 @@ vector<int> ABR(vector<int> array,int numberOfOnes, vector<int> sortedOnes) {
 
 	return sortedOnes;
 }
-void BRT(int numberOfOnes, string BR[], vector<int> miOnes) {
+void BRTable(int numberOfOnes, string BR[], vector<int> miOnes) {
 	for (int i = 0; i < numberOfOnes; i++) {
 		cout << setw(10);
 		cout << BR[miOnes[i]] << ": " << miOnes[i] << endl;
+	}
+}
+void coutFunction(int numberOfOnes, vector<int> array) {
+	cout << "Q(ABCD):{";
+	for (int i = 0; i < numberOfOnes; i++) {
+		cout << array[i];
+		if (i != numberOfOnes - 1) {
+			cout << ", ";
+		}
+	}
+	cout << "}" << endl;
+}
+int getGroup(int groups[5][6], int key) {
+	for (int i = 0; i < 5; i++) {
+		for (int j = 0; j < 6; j++) {
+			if (key == groups[i][j]) {
+				return i;
+			}
+		}
 	}
 }
 
@@ -79,17 +99,19 @@ int main() {
 	"1101",
 	"1110",
 	"1111"
-	};
+	}; // Binary Representation
+	int groups[5][6] = { {0}, {1,2,4,8} ,{3,5,6,9,10,12}, {7,11,13}, {15} };
 
-	// Request the outputs on 1 from Mi. table
+	// Request the outputs on 1 from Minterm table
 	int numberOfOnes;
 	vector<int> miOnes;
 	int input;
 
-	cout << "Please give me the number of '1' from the Mi. table: ";
+	cout << "Please give me the sum of '1' from the Mi. table: ";
 	cin >> numberOfOnes;
 	cout << endl;
 
+	cout << "Please give me the outputs on 1 from the Minterm table: ";
 	for (int i = 0; i < numberOfOnes; i++) {
 		do {
 			cin >> input;
@@ -103,26 +125,19 @@ int main() {
 	// Clear console
 	system("cls");
 
-	// Show Quine-McCluskey function
-	cout << "Q(ABCD):{";
-	for (int i = 0; i < numberOfOnes; i++) {
-		cout << miOnes[i];
-		if (i != numberOfOnes - 1) {
-			cout << ", ";
-		}
-	}
-	cout << "}" << endl;
-
+	// Write out the Quine-McCluskey function
+	coutFunction(numberOfOnes, miOnes);
+	
 	// Binary Representation Table
 	cout << endl << endl << "BR:" << endl;
 	cout << "----------------------" << endl;
-	BRT(numberOfOnes, BR, miOnes);
+	BRTable(numberOfOnes, BR, miOnes);
 
 	// Quantity of 1s
+	vector<int> BRQ; // Binary Representation Quantity
+	int Q; // Quantity
 	cout << endl << endl << "1s Quantity:" << endl;
 	cout << "----------------------" << endl;
-	vector<int> BRQ;
-	int Q;
 	for (int i = 0; i < numberOfOnes; i++) {
 		Q = 0;
 		for (int j = 0; j < 4; j++) {
@@ -134,7 +149,7 @@ int main() {
 		cout << setw(10);
 		cout << miOnes[i] << ": " << Q << endl;
 	}
-
+	
 	// ABR Sorting -> Ascending Binary Representation
 	sort(miOnes.begin(), miOnes.end());
 	vector<int> sortedOnes;
@@ -142,9 +157,31 @@ int main() {
 	cout << "----------------------" << endl;
 	sortedOnes = ABR(miOnes, numberOfOnes, sortedOnes);
 
-	// Simplification => checking distance
-	
+	// Simplification => checking distance (I.stage)
+	cout << endl << endl << "I.stage:" << endl;
+	cout << "----------------------" << endl;
+	for (int i = 0; i < numberOfOnes; i++) {
+		// Get the watching number's group
+		int group = getGroup(groups, sortedOnes[i]);
+		// getting distances
+		for (int j = 1; j < numberOfOnes; j++) {
+			int nextNumberGroup = getGroup(groups, sortedOnes[j]);
+			if (group < nextNumberGroup) {
+				// check if its bigger or not
+				if (sortedOnes[i] < sortedOnes[j]) {
+					int distance = sortedOnes[j] - sortedOnes[i];
+					float distanceLog = log(distance) / log(2);
+					float isPowerOfTwo = fmod(distanceLog, 1);
+					if (isPowerOfTwo == 0) {
+						cout << setw(10);
+						cout << sortedOnes[i] << "," << sortedOnes[j] << "(" << distance << ")" << endl;
+					}
+				}
+			}
+		}
+	}
 
+	// II.stage
 	
 
 	system("pause");
