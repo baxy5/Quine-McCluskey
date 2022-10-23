@@ -160,8 +160,9 @@ int main() {
 	// Simplification => checking distance (I.stage)
 	cout << endl << endl << "I.stage:" << endl;
 	cout << "----------------------" << endl;
+	vector<int> stageOneDistances;
 	for (int i = 0; i < numberOfOnes; i++) {
-		// Get the watching number's group
+		// Get the number's group
 		int group = getGroup(groups, sortedOnes[i]);
 		// getting distances
 		for (int j = 1; j < numberOfOnes; j++) {
@@ -170,11 +171,14 @@ int main() {
 				// check if its bigger or not
 				if (sortedOnes[i] < sortedOnes[j]) {
 					int distance = sortedOnes[j] - sortedOnes[i];
-					float distanceLog = log(distance) / log(2);
-					float isPowerOfTwo = fmod(distanceLog, 1);
+					double distanceLog = log(distance) / log(2);
+					double isPowerOfTwo = fmod(distanceLog, 1);
 					if (isPowerOfTwo == 0) {
 						cout << setw(10);
 						cout << sortedOnes[i] << "," << sortedOnes[j] << "(" << distance << ")" << endl;
+						stageOneDistances.push_back(sortedOnes[i]);
+						stageOneDistances.push_back(sortedOnes[j]);
+						stageOneDistances.push_back(distance);
 					}
 				}
 			}
@@ -182,6 +186,8 @@ int main() {
 	}
 
 	// II.stage
+	cout << endl << endl << "II.stage:" << endl;
+	cout << "----------------------" << endl;
 	
 
 	system("pause");
