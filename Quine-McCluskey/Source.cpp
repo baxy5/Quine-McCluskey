@@ -181,6 +181,14 @@ int main() {
 			// checking if the distance is the same
 			if (stageOneDistances[i] == stageOneDistances[j]) {
 				// checking if the second distance's number is power of 2
+				/*int distance = abs(stageOneDistances[i - 2] - stageOneDistances[j - 2]);
+				double distanceLog = log(distance) / 2;
+				double isPowerOfTwo = fmod(distanceLog, 1);
+				if (isPowerOfTwo == 0 || distance == 1) {
+					cout << stageOneDistances[i - 2] << "," << stageOneDistances[i - 1] << ",";
+					cout << stageOneDistances[j - 2] << "," << stageOneDistances[j - 1] << "(";
+					cout << stageOneDistances[i] << "," << abs(stageOneDistances[i - 2] - stageOneDistances[j - 2]) << ")" << endl;
+				}*/
 				cout << stageOneDistances[i - 2] << "," << stageOneDistances[i - 1] << ",";
 				cout << stageOneDistances[j - 2] << "," << stageOneDistances[j - 1] << "(";
 				cout << stageOneDistances[i] << "," << abs(stageOneDistances[i - 2] - stageOneDistances[j - 2]) << ")" << endl;
