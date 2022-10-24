@@ -7,58 +7,48 @@
 
 using namespace std;
 
+void BRTable(int numberOfOnes, string BR[], vector<int> miOnes) {
+	for (int i = 0; i < numberOfOnes; i++) {
+		cout << BR[miOnes[i]] << ": " << miOnes[i] << endl;
+	}
+}
 vector<int> ABR(vector<int> array,int numberOfOnes, vector<int> sortedOnes) {
 	for (int i = 0; i < numberOfOnes; i++) {
 		if (array[i] == 0) {
-			cout << setw(10);
 			cout << array[i] << endl;
 			sortedOnes.push_back(array[i]);
 		}
 	}
-	cout << setw(10);
 	cout << "-" << endl;
 	for (int i = 0; i < numberOfOnes; i++) {
 		if (array[i] == 1 || array[i] == 2 || array[i] == 4 || array[i] == 8) {
-			cout << setw(10);
 			cout << array[i] << endl;
 			sortedOnes.push_back(array[i]);
 		}
 	}
-	cout << setw(10);
 	cout << "-" << endl;
 	for (int i = 0; i < numberOfOnes; i++) {
 		if (array[i] == 3 || array[i] == 5 || array[i] == 6 || array[i] == 9 || array[i] == 10 || array[i] == 12) {
-			cout << setw(10);
 			cout << array[i] << endl;
 			sortedOnes.push_back(array[i]);
 		}
 	}
-	cout << setw(10);
 	cout << "-" << endl;
 	for (int i = 0; i < numberOfOnes; i++) {
 		if (array[i] == 7 || array[i] == 11 || array[i] == 13 || array[i] == 14) {
-			cout << setw(10);
 			cout << array[i] << endl;
 			sortedOnes.push_back(array[i]);
 		}
 	}
-	cout << setw(10);
 	cout << "-" << endl;
 	for (int i = 0; i < numberOfOnes; i++) {
 		if (array[i] == 15) {
-			cout << setw(10);
 			cout << array[i] << endl;
 			sortedOnes.push_back(array[i]);
 		}
 	}
 
 	return sortedOnes;
-}
-void BRTable(int numberOfOnes, string BR[], vector<int> miOnes) {
-	for (int i = 0; i < numberOfOnes; i++) {
-		cout << setw(10);
-		cout << BR[miOnes[i]] << ": " << miOnes[i] << endl;
-	}
 }
 void coutFunction(int numberOfOnes, vector<int> array) {
 	cout << "Q(ABCD):{";
@@ -146,7 +136,6 @@ int main() {
 			}
 		}
 		BRQ.push_back(Q);
-		cout << setw(10);
 		cout << miOnes[i] << ": " << Q << endl;
 	}
 	
@@ -174,7 +163,6 @@ int main() {
 					double distanceLog = log(distance) / log(2);
 					double isPowerOfTwo = fmod(distanceLog, 1);
 					if (isPowerOfTwo == 0) {
-						cout << setw(10);
 						cout << sortedOnes[i] << "," << sortedOnes[j] << "(" << distance << ")" << endl;
 						stageOneDistances.push_back(sortedOnes[i]);
 						stageOneDistances.push_back(sortedOnes[j]);
@@ -188,6 +176,26 @@ int main() {
 	// II.stage
 	cout << endl << endl << "II.stage:" << endl;
 	cout << "----------------------" << endl;
+	for (int i = 2; i < stageOneDistances.size(); i+=3) {
+		for (int j = i+3; j < stageOneDistances.size(); j += 3) {
+			// checking if the distance is the same
+			if (stageOneDistances[i] == stageOneDistances[j]) {
+				// checking if the second distance's number is power of 2
+				cout << stageOneDistances[i - 2] << "," << stageOneDistances[i - 1] << ",";
+				cout << stageOneDistances[j - 2] << "," << stageOneDistances[j - 1] << "(";
+				cout << stageOneDistances[i] << "," << abs(stageOneDistances[i - 2] - stageOneDistances[j - 2]) << ")" << endl;
+			}
+		}
+	}
+	
+	/*vector<int> indexes;
+	for (int i = 2; i < stageOneDistances.size(); i+=3) {
+		indexes.push_back(i);
+	}
+	for (int i = 0; indexes.size(); i++) {
+		cout << indexes[i] << " ";
+	} */
+
 	
 
 	system("pause");
