@@ -229,7 +229,38 @@ int main() {
 	// III.stage
 	cout << endl << endl << "III.stage:" << endl;
 	cout << "----------------------" << endl;
-	
+	for (int i = 4; i < stageTwoDistances.size(); i += 6) {
+
+		// first number's group
+		int group = getGroup(groups, stageTwoDistances[i - 2]);
+
+		for (int j = i + 6; j < stageTwoDistances.size(); j += 6) {
+
+			// checking if the distance is the same
+			if (stageTwoDistances[i] == stageTwoDistances[j] && stageTwoDistances[i+1] == stageTwoDistances[j+1]) {
+
+				// Getting the number's group
+				// next number's group
+				int nextNumberGroup = getGroup(groups, stageTwoDistances[j - 2]);
+
+				if (group < nextNumberGroup) {
+
+					// checking if the second distance's number is power of 2
+					int distance = abs(stageTwoDistances[i - 2] - stageTwoDistances[j - 2]);
+					double distanceLog = log(distance) / log(2);
+					double isPowerOfTwo = fmod(distanceLog, 1);
+					if (isPowerOfTwo == 0) {
+						cout << stageTwoDistances[i - 4] << "," << stageTwoDistances[i - 3] << "," << stageTwoDistances[i - 2] << ",";
+						cout << stageTwoDistances[i - 1] << ",";
+						cout << stageTwoDistances[j - 4] << "," << stageTwoDistances[j - 3] << "," << stageTwoDistances[j - 2] << ",";
+						cout << stageTwoDistances[j - 1] << "(";
+						cout << stageTwoDistances[i] << "," << stageTwoDistances[i + 1] << "," << abs(stageTwoDistances[i - 2] - stageTwoDistances[j - 2]) << ")";
+						cout << endl;
+					}
+				}
+			}
+		}
+	}
 
 	system("pause");
 	return 0;
