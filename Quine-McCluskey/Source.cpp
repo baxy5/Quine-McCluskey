@@ -7,6 +7,11 @@
 
 using namespace std;
 
+// BRTable => Find decimal's binary representation, and displays in a table.
+// ABR => Arrange our decimal's ascendingly by 1s.
+// coutFunction => Display our function.
+// getGroup => Groups("súlyszám"), get the key value's group.
+
 void BRTable(int numberOfOnes, string BR[], vector<int> miOnes) {
 	for (int i = 0; i < numberOfOnes; i++) {
 		cout << BR[miOnes[i]] << ": " << miOnes[i] << endl;
@@ -184,6 +189,7 @@ int main() {
 	// II.stage
 	cout << endl << endl << "II.stage:" << endl;
 	cout << "----------------------" << endl;
+	vector<int> stageTwoDistances;
 	for (int i = 2; i < stageOneDistances.size(); i+=3) {
 		
 		// first number's group
@@ -208,14 +214,21 @@ int main() {
 						cout << stageOneDistances[i - 2] << "," << stageOneDistances[i - 1] << ",";
 						cout << stageOneDistances[j - 2] << "," << stageOneDistances[j - 1] << "(";
 						cout << stageOneDistances[i] << "," << abs(stageOneDistances[i - 2] - stageOneDistances[j - 2]) << ")" << endl;
+						stageTwoDistances.push_back(stageOneDistances[i - 2]);
+						stageTwoDistances.push_back(stageOneDistances[i - 1]);
+						stageTwoDistances.push_back(stageOneDistances[j - 2]);
+						stageTwoDistances.push_back(stageOneDistances[j - 1]);
+						stageTwoDistances.push_back(stageOneDistances[i]);
+						stageTwoDistances.push_back(abs(stageOneDistances[i - 2] - stageOneDistances[j - 2]));
 					}
 				}
 			}
-
 		}
 	}
 	
-
+	// III.stage
+	cout << endl << endl << "III.stage:" << endl;
+	cout << "----------------------" << endl;
 	
 
 	system("pause");
