@@ -151,14 +151,21 @@ int main() {
 	cout << "----------------------" << endl;
 	vector<int> stageOneDistances;
 	for (int i = 0; i < numberOfOnes; i++) {
-		// Get the number's group
+
+		// Getting the number's group
 		int group = getGroup(groups, sortedOnes[i]);
+
 		// getting distances
 		for (int j = 1; j < numberOfOnes; j++) {
 			int nextNumberGroup = getGroup(groups, sortedOnes[j]);
+
+			// checking groups
 			if (group < nextNumberGroup) {
+
 				// check if its bigger or not
 				if (sortedOnes[i] < sortedOnes[j]) {
+
+					// checking if number is power of two
 					int distance = sortedOnes[j] - sortedOnes[i];
 					double distanceLog = log(distance) / log(2);
 					double isPowerOfTwo = fmod(distanceLog, 1);
@@ -169,6 +176,7 @@ int main() {
 						stageOneDistances.push_back(distance);
 					}
 				}
+
 			}
 		}
 	}
@@ -177,19 +185,33 @@ int main() {
 	cout << endl << endl << "II.stage:" << endl;
 	cout << "----------------------" << endl;
 	for (int i = 2; i < stageOneDistances.size(); i+=3) {
+		
+		// first number's group
+		int group = getGroup(groups, stageOneDistances[i-2]);
+
 		for (int j = i+3; j < stageOneDistances.size(); j += 3) {
+
 			// checking if the distance is the same
 			if (stageOneDistances[i] == stageOneDistances[j]) {
-				// checking if the second distance's number is power of 2
-				int distance = abs(stageOneDistances[i - 2] - stageOneDistances[j - 2]);
-				double distanceLog = log(distance) / log(2);
-				double isPowerOfTwo = fmod(distanceLog, 1);
-				if (isPowerOfTwo == 0) {
-					cout << stageOneDistances[i - 2] << "," << stageOneDistances[i - 1] << ",";
-					cout << stageOneDistances[j - 2] << "," << stageOneDistances[j - 1] << "(";
-					cout << stageOneDistances[i] << "," << abs(stageOneDistances[i - 2] - stageOneDistances[j - 2]) << ")" << endl;
+
+				// Getting the number's group
+				// next number's group
+				int nextNumberGroup = getGroup(groups, stageOneDistances[j-2]);
+
+				if(group < nextNumberGroup){
+
+					// checking if the second distance's number is power of 2
+					int distance = abs(stageOneDistances[i - 2] - stageOneDistances[j - 2]);
+					double distanceLog = log(distance) / log(2);
+					double isPowerOfTwo = fmod(distanceLog, 1);
+					if (isPowerOfTwo == 0) {
+						cout << stageOneDistances[i - 2] << "," << stageOneDistances[i - 1] << ",";
+						cout << stageOneDistances[j - 2] << "," << stageOneDistances[j - 1] << "(";
+						cout << stageOneDistances[i] << "," << abs(stageOneDistances[i - 2] - stageOneDistances[j - 2]) << ")" << endl;
+					}
 				}
 			}
+
 		}
 	}
 	
