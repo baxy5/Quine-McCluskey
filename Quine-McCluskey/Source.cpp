@@ -211,6 +211,10 @@ int main() {
 					double distanceLog = log(distance) / log(2);
 					double isPowerOfTwo = fmod(distanceLog, 1);
 					if (isPowerOfTwo == 0) {
+
+						// elimination
+
+
 						cout << stageOneDistances[i - 2] << "," << stageOneDistances[i - 1] << ",";
 						cout << stageOneDistances[j - 2] << "," << stageOneDistances[j - 1] << "(";
 						cout << stageOneDistances[i] << "," << abs(stageOneDistances[i - 2] - stageOneDistances[j - 2]) << ")" << endl;
@@ -250,6 +254,9 @@ int main() {
 					double distanceLog = log(distance) / log(2);
 					double isPowerOfTwo = fmod(distanceLog, 1);
 					if (isPowerOfTwo == 0) {
+
+						// elimination
+
 						cout << stageTwoDistances[i - 4] << "," << stageTwoDistances[i - 3] << "," << stageTwoDistances[i - 2] << ",";
 						cout << stageTwoDistances[i - 1] << ",";
 						cout << stageTwoDistances[j - 4] << "," << stageTwoDistances[j - 3] << "," << stageTwoDistances[j - 2] << ",";
