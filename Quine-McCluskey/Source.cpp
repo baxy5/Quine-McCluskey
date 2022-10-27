@@ -74,6 +74,10 @@ int getGroup(int groups[5][6], int key) {
 		}
 	}
 }
+int elimination(int s, vector<int> array){
+
+
+}
 
 int main() {
 
